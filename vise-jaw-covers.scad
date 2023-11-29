@@ -33,7 +33,7 @@ Magnets_Count = 2;
 Magnets_Surface = "top"; // [top:Top only, face:Face only, both:Both top and face]
 
 // The shape of the magnets, circle or square.
-Magnets_Shape = 0; // [0:Circle, 1:Square]
+Magnets_Shape = 0; // [0:Round, 1:Square]
 
 // Size of the magnets. For round magnets input the diameter, for square ones use the side of the square.
 Magnets_Size = 10; // .01
@@ -73,8 +73,8 @@ Grip_Lines_Vertical_Offset = 0; // .1
 // Include a horizontal round stock holder
 Horizontal_Round_Stock_Holder = "yes"; // [yes, no]
 
-// Groove face size
-Horizontal_Round_Stock_Holder_Depth = 7.5; // .1
+// Groove face size (min diameter of stock to be clamped)
+Horizontal_Round_Stock_Holder_Size = 7.5; // .1
 
 // Angle scale of the groove faces. 1 = 45 degrees; <1 = smaller angles; >1 larger angles.
 Horizontal_Round_Stock_Holder_Scale = 1; // .1
@@ -86,8 +86,8 @@ Horizontal_Round_Stock_Holder_Scale = 1; // .1
 // Include a main vertical round stock holder
 Main_Vertical_Round_Stock_Holder = "yes"; // [yes, no]
 
-// Groove face size
-Main_Vertical_Round_Stock_Holder_Depth = 7.5; // .1
+// Groove face size (min diameter of stock to be clamped)
+Main_Vertical_Round_Stock_Holder_Size = 7.5; // .1
 
 // Angle scale of the groove faces. 1 = 45 degrees; <1 = smaller angles; >1 larger angles.
 Main_Vertical_Round_Stock_Holder_Scale = 1; // .1
@@ -105,8 +105,8 @@ Main_Vertical_Round_Stock_Holder_Angle = 0;
 // Include a secondary vertical round stock holder
 Secondary_Vertical_Round_Stock_Holder = "yes"; // [yes, no]
 
-// Groove face size
-Secondary_Vertical_Round_Stock_Holder_Depth = 7.5; // .1
+// Groove face size (min diameter of stock to be clamped)
+Secondary_Vertical_Round_Stock_Holder_Size = 7.5; // .1
 
 // Angle scale of the groove faces. 1 = 45 degrees; <1 = smaller angles; >1 larger angles.
 Secondary_Vertical_Round_Stock_Holder_Scale = 1; // .1
@@ -127,7 +127,7 @@ Generate_Objects = "both"; // [both: Both jaws, left: Left jaw, right: Right jaw
 // The orientation of the rendered jaw covers.
 Orientation = 0; // [0: Top face down, 90: Front face down, 180: Top face up, 270: Front face up]
 
-// Circle facets (increase for better visualization of round holes)
+// Round features segments (increase for better visualization of holes)
 $fn = 100;
 
 
@@ -141,9 +141,9 @@ totalHeight = Jaw_Height + Top_Wall_Thickness;
 
 /***** Pre-render checks *****/
 
-if (Horizontal_Round_Stock_Holder_Depth >= totalHeight)
+if (Horizontal_Round_Stock_Holder_Size >= totalHeight)
 {
-	echo ("ERROR: *Horizontal_Round_Stock_Holder_Depth* should be less than *totalHeight*");
+	echo ("ERROR: *Horizontal_Round_Stock_Holder_Size* should be less than *totalHeight*");
 }
 
 else if (Magnets_Count > 0 && Magnets_Surface != "face" && Top_Wall_Thickness <= Magnets_Depth)
@@ -278,7 +278,7 @@ module CreateJaw()
 			{
 				rotate([0,90,0])
 				{
-					CreateRoundStockHolderGroove(Horizontal_Round_Stock_Holder_Depth, Jaw_Length, Horizontal_Round_Stock_Holder_Scale);
+					CreateRoundStockHolderGroove(Horizontal_Round_Stock_Holder_Size, Jaw_Length, Horizontal_Round_Stock_Holder_Scale);
 				}
 			}
 		}
@@ -291,7 +291,7 @@ module CreateJaw()
 			{
 				rotate([0, Main_Vertical_Round_Stock_Holder_Angle, 0])
 				{
-					CreateRoundStockHolderGroove(Main_Vertical_Round_Stock_Holder_Depth, totalHeight, Main_Vertical_Round_Stock_Holder_Scale);
+					CreateRoundStockHolderGroove(Main_Vertical_Round_Stock_Holder_Size, totalHeight, Main_Vertical_Round_Stock_Holder_Scale);
 				}   
 			}
 		}
@@ -303,7 +303,7 @@ module CreateJaw()
 			{
 				rotate([0, Secondary_Vertical_Round_Stock_Holder_Angle, 0]) 
 				{
-					CreateRoundStockHolderGroove(Secondary_Vertical_Round_Stock_Holder_Depth, totalHeight, Secondary_Vertical_Round_Stock_Holder_Scale);
+					CreateRoundStockHolderGroove(Secondary_Vertical_Round_Stock_Holder_Size, totalHeight, Secondary_Vertical_Round_Stock_Holder_Scale);
 				}  
 			}
 		}
