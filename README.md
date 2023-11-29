@@ -62,7 +62,7 @@ A grid of grip lines on the surface of the cover, to improve grip on smooth mate
 
 Originally derived from the following projects on Printables:
 - [Customizable Vise Soft Jaws (fully parametric!)](https://www.printables.com/model/12846-customizable-vise-soft-jaws-fully-parametric) by user **DT**
-- [Remix - Customizable soft jaws for vise (fully parametric)](https://www.printables.com/model/85269-remix-customizable-soft-jaws-for-vise-fully-parame) by user MojoRuns
+- [Remix - Customizable soft jaws for vise (fully parametric)](https://www.printables.com/model/85269-remix-customizable-soft-jaws-for-vise-fully-parame) by user **MojoRuns**
 
 The majority of the code has been rewritten or heavily modified. The original reason to rewrite it was to change the dimension parameters from the size of the finished cover (requiring calculations) to instead derive from the measures of the vise jaw. Also, the original models had issue with phantom surfaces showing up in the preview (from undersized solid cutting), which made visualising the preview hard.
 
